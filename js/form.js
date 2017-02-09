@@ -29,3 +29,23 @@ var close = document.querySelector('.dialog__close'); // выбираем кре
     pin.classList.remove('pin--active');
   });
 });
+
+ // Валидация поля - название объявления
+var YourForm = document.querySelector('.form__content');
+var inputFormName = YourForm.querySelector('#title');
+
+inputFormName.required = true; // Обязательное поле!
+inputFormName.minLength = 30; // Минимальная длина — 30 символов
+inputFormName.maxLength = 100; // Макcимальная длина — 100 символов
+
+// Валидация поля - цена за ночь
+var inputFormPrice = YourForm.querySelector('#price');
+
+inputFormPrice.required = true; // Обязательное поле!
+inputFormPrice.min = 1000; // Минимальное числовое значение — 1000
+inputFormPrice.max = 1000000; // Максимальное числовое значение — 1000000
+
+// Валидация поля - Адрес
+var inputFormAddress = YourForm.querySelector('#address');
+
+inputFormAddress.required = true; // Обязательное поле!
