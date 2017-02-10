@@ -13,10 +13,7 @@ var close = document.querySelector('.dialog__close'); // выбираем кре
 // если  у текущего пина нет класса pin--active то добавляем его ему по клику на пине
     if (!pin.classList.contains('pin--active')) {
       pin.classList.add('pin--active');
-    }
-
- // если класс pin--active  был, то удаляем по клику
-    else {
+    } else {
       dialog.style.visibility = 'hidden';
       pin.classList.remove('pin--active');
     }
