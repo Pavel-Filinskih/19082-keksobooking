@@ -100,3 +100,63 @@ function roomNumberSelect() {
 }
 
 roomNumber.addEventListener('change', roomNumberSelect);
+/*
+1. Сделать сайт более доступным для людей с ограниченными возможностями.
+
+Выберите из списка на MDN подходящие роли и состояния добавьте их для соответсвующих элементов.
+
+div.dialog
+a.dialog__close
+div.pin
+
+Сделайте так, чтобы выбор метки на карте можно было осуществлять не только при помощи мыши
+но и с клавиатуры:
+
+Нажатие на метку div.pin должно показывать диалог с описанием.
+
+Переключение меток на карте Токио должно работать не только при помощи мыши, но и с клавиатуры.
+Нажатие на закрытие диалога a.dialog__close должно скрывать диалог с описанием.
+
+2. Оптимизировать обработчики используя делегирование.
+
+Перевесьте обработчик выбора текущего жилья с конкретного тега с классом div.pin
+на делегированный с картой Токио div.tokyo__pin-map
+
+Для кнопки закрытия формы/диалога не надо добавлять отдельные обработчики клавиатуры
+при фокусе на кнопку
+
+Обратите внимание !!!
+
+При переключении состояния элемента нужно обновлять атрибут,
+соответствующий состоянию роли в DOM-дереве,
+например при клике на кнопку нужно обновлять aria-pressed
+*/
+
+// Cайт более доступный для людей с ограниченными возможностями.
+
+var ENTER_KEY_CODE = 13;
+var ESCAPE_KEY_CODE = 27;
+
+[].forEach.call(pins, function (pin) {
+  pin.addEventListener('keydown', function () {
+
+    dialog.style.visibility = 'visible';
+
+    // если иконка не выделена "красной обводкой" то добавляем .pin--active
+    if (pin.keyCode === ENTER_KEY_CODE || !pin.classList.contains('pin--active')) {
+      pin.classList.add('pin--active');
+    } else {
+      dialog.style.visibility = 'hidden';
+      pin.classList.remove('pin--active');
+    }
+  });
+
+  // закрываем карточку объявления - нажатием кнопки
+  close.addEventListener('keydown', function (cls) {
+    if (cls.keyCode === ESCAPE_KEY_CODE) {
+      dialog.style.visibility = 'hidden';
+      pin.classList.remove('pin--active');
+      close.setAttribute('aria-pressed', 'true');
+    }
+  });
+});
