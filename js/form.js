@@ -101,8 +101,6 @@ function roomNumberSelect() {
 
 roomNumber.addEventListener('change', roomNumberSelect);
 
-// Cайт более доступный для людей с ограниченными возможностями.
-
 var ENTER_KEY_CODE = 13;
 var ESCAPE_KEY_CODE = 27;
 
