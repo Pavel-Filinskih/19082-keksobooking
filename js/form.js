@@ -1,51 +1,21 @@
 'use strict';
 
-var pins = document.querySelectorAll('div.pin'); // выбираем все элементы div с классом pin
 var dialog = document.querySelector('.dialog'); // выбираем элемент dialog карточки обьявления
 var close = document.querySelector('.dialog__close'); // выбираем крестик закрывающий карточку обьявления
+var pinMap = document.querySelector('.tokyo__pin-map');
 
-[].forEach.call(pins, function (pin) {
-  pin.addEventListener('click', function () {
+var ENTER_KEY_CODE = 13;
+var ESCAPE_KEY_CODE = 27;
 
-// добавляем свойству visibility значение visible , чтобы окно карточки обьявления  стало видимым при клике на текущий pin
-    dialog.style.visibility = 'visible';
-
-// если  у текущего пина нет класса pin--active то добавляем его ему по клику на пине
-    if (!pin.classList.contains('pin--active')) {
-      pin.classList.add('pin--active');
-    } else {
-      dialog.style.visibility = 'hidden';
-      pin.classList.remove('pin--active');
-    }
-  });
-
-  // добавляем событие  по клику на крестике карточки обьявления, меняем свойство visibility карточки диалога на hidden  по клику на крестике
-  close.addEventListener('click', function () {
-    dialog.style.visibility = 'hidden';
-// заодно удаляем класс  pin--active у текущего пина при нажатии на крестик на карточке
-    pin.classList.remove('pin--active');
-  });
-});
-
- // Валидация поля - название объявления
+// Валидация поля - название объявления
 var YourForm = document.querySelector('.form__content');
 var inputFormName = YourForm.querySelector('#title');
-
-inputFormName.required = true; // Обязательное поле!
-inputFormName.minLength = 30; // Минимальная длина — 30 символов
-inputFormName.maxLength = 100; // Макcимальная длина — 100 символов
-
-// Валидация поля - цена за ночь
-var inputFormPrice = YourForm.querySelector('#price');
-
-inputFormPrice.required = true; // Обязательное поле!
-inputFormPrice.min = 1000; // Минимальное числовое значение — 1000
-inputFormPrice.max = 1000000; // Максимальное числовое значение — 1000000
 
 // Валидация поля - Адрес
 var inputFormAddress = YourForm.querySelector('#address');
 
-inputFormAddress.required = true; // Обязательное поле!
+// Валидация поля - цена за ночь
+var inputFormPrice = YourForm.querySelector('#price');
 
 // Автоматическая корректировка полей в форме
 var inHouse = YourForm.querySelector('#time'); // Выбор поля - Время заезда
@@ -53,6 +23,62 @@ var fromHouse = YourForm.querySelector('#timeout'); // Выбор поля - В�
 var houseType = YourForm.querySelector('#type'); // Выбор поля - Тип жилья
 var roomNumber = YourForm.querySelector('#room_number'); // Выбор поля - Кол-во комнат
 var guestsNumber = YourForm.querySelector('#capacity'); // Выбор поля - Количество мест
+
+var hideDialog = function () {
+  dialog.style.display = 'none';
+};
+
+var deactivatePin = function () {
+  var prevPin = document.querySelector('.pin--active');
+  if (prevPin) {
+    prevPin.classList.remove('pin--active');
+    hideDialog();
+  }
+};
+
+var activatePin = function (element) {
+  deactivatePin();
+  element.classList.add('pin--active');
+  dialog.style.display = 'block';
+};
+
+pinMap.addEventListener('click', function (e) {
+  var element = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
+
+  if (element.classList.contains('pin')) {
+    activatePin(element);
+  }
+});
+
+pinMap.addEventListener('keydown', function (e) {
+  var element = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
+
+  if (element.classList.contains('pin') && e.keyCode === ENTER_KEY_CODE) {
+    activatePin(element);
+  }
+});
+
+close.addEventListener('click', function () {
+  deactivatePin();
+});
+
+pinMap.addEventListener('keydown', function (e) {
+  var element = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
+
+  if (element.classList.contains('pin') && e.keyCode === ESCAPE_KEY_CODE) {
+    deactivatePin();
+  }
+});
+
+inputFormName.required = true; // Обязательное поле!
+inputFormName.minLength = 30; // Минимальная длина — 30 символов
+inputFormName.maxLength = 100; // Макcимальная длина — 100 символов
+
+inputFormPrice.required = true; // Обязательное поле!
+inputFormPrice.min = 1000; // Минимальное числовое значение — 1000
+inputFormPrice.max = 1000000; // Максимальное числовое значение — 1000000
+
+inputFormAddress.required = true; // Обязательное поле!
 
 function inHouseSelect() {
   fromHouse.value = inHouse.value;
