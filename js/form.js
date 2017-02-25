@@ -25,4 +25,4 @@ window.initializePins();
 window.synchronizeFields(inHouse, fromHouse, ['12', '13', '14'], ['12', '13', '14'], 'value');
 window.synchronizeFields(fromHouse, inHouse, ['12', '13', '14'], ['12', '13', '14'], 'value');
 window.synchronizeFields(houseType, inputFormPrice, ['apartment', 'hovel', 'palace'], ['1000', '0', '10000'], 'placeholder');
-window.synchronizeFields(roomNumber, guestsNumber, ['room_1', 'room_2', 'room_100'], ['noguests', 'noguests', '3guests'], 'value');
+window.synchronizeFields(roomNumber, guestsNumber, ['room_1', 'room_2', 'room_100'], ['noguests', '3guests', '3guests'], 'value');
