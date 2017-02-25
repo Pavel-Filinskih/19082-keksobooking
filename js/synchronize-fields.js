@@ -1,26 +1,13 @@
 'use strict';
 
-/*
-Функция принимает на вход пять параметров:
+window.synchronizeFields = function (syncDomElem, syncDomElem2, arrValueSync, arrValueSync2, strNameValue) {
+  syncDomElem.addEventListener('change', function () {
+    var selectedVal = arrValueSync.indexOf(syncDomElem.value);
+    syncDomElem2[strNameValue] = arrValueSync2[selectedVal];
+  });
 
-в первых двух параметрах передаются DOM-элементы синхронизируемых полей.
-Следующие два параметра представляют собой два массива, которые содержат синхронизируемые значения.
-Например, если при выборе в первом поле значения с valueа,
-во втором должно выбираться значение b (и наоборот),
-то массивы должны выглядеть как ['a'] и ['b'].
-
-Последний параметр содержит строку, с названием свойства второго объекта,
-которое нужно изменять при изменении первого (например, 'max' или 'value').
-*/
-
-window.synchronizeFields = function () {
-
+  syncDomElem2.addEventListener('change', function () {
+    var selectedVal = arrValueSync2.indexOf(syncDomElem2.value);
+    syncDomElem[strNameValue] = arrValueSync[selectedVal];
+  });
 };
-
-/*
-Значения в массивах, которые передаются в функцию должны быть явно заданы в JS,
-а не посчитаны автоматически.
-
-Возьмите в качестве значений массивов те value,
-которые вы поставили для соответствующих записей в полях option в предыдущих заданиях.
-*/

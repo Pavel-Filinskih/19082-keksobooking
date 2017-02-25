@@ -1,15 +1,14 @@
 'use strict';
 
-// Валидация поля - название объявления
 var YourForm = document.querySelector('.form__content'); // Контейнер родитель полей формы
 var inputFormName = YourForm.querySelector('#title'); // Заголовок объявления
 
 var inputFormAddress = YourForm.querySelector('#address'); // Валидация поля - Адрес
 var inputFormPrice = YourForm.querySelector('#price'); // Валидация поля - цена за ночь
 
-// Автоматическая корректировка полей в форме
 var inHouse = YourForm.querySelector('#time'); // Выбор поля - Время заезда
 var fromHouse = YourForm.querySelector('#timeout'); // Выбор поля - Время выезда
+
 var houseType = YourForm.querySelector('#type'); // Выбор поля - Тип жилья
 var roomNumber = YourForm.querySelector('#room_number'); // Выбор поля - Кол-во комнат
 var guestsNumber = YourForm.querySelector('#capacity'); // Выбор поля - Количество мест
@@ -23,6 +22,15 @@ inputFormPrice.min = 1000; // Минимальное числовое значе
 inputFormPrice.max = 1000000; // Максимальное числовое значение — 1000000
 inputFormAddress.required = true; // Обязательное поле!
 
+window.initializePins();
+
+window.synchronizeFields(inHouse, fromHouse, ['12', '13', '14'], ['12', '13', '14'], 'value');
+window.synchronizeFields(fromHouse, inHouse, ['12', '13', '14'], ['12', '13', '14'], 'value');
+
+window.synchronizeFields(houseType, inputFormPrice, ['1000', '0', '10000'], ['1000', '0', '10000'], 'min');
+window.synchronizeFields(roomNumber, guestsNumber, ['1', '2', '100'], ['0', '3', '3'], 'value');
+
+/*
 // Въезд = выезд. Тип жилья = количество комнат
 function inHouseSelect() {
   fromHouse.value = inHouse.value;
@@ -70,4 +78,4 @@ function roomNumberSelect() {
 }
 
 roomNumber.addEventListener('change', roomNumberSelect);
-window.initializePins();
+*/
