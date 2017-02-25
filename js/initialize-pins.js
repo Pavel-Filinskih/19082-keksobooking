@@ -2,8 +2,8 @@
 
 window.initializePins = function () {
   var pinMap = document.querySelector('.tokyo__pin-map');
-  var dialog = document.querySelector('.dialog'); // выбираем элемент dialog карточки обьявления
-  var close = document.querySelector('.dialog__close'); // выбираем крестик закрывающий карточку обьявления
+  var dialog = document.querySelector('.dialog');
+  var close = document.querySelector('.dialog__close');
 
   var ENTER_KEY_CODE = 13;
   var ESCAPE_KEY_CODE = 27;
