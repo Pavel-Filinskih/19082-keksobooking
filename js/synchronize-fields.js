@@ -1,6 +1,6 @@
 'use strict';
 
-window.synchronizeFields = function (syncDomElem, syncDomElem2, arrValueSync, arrValueSync2, strNameValue) {
+window.synchronizeFields = (function (syncDomElem, syncDomElem2, arrValueSync, arrValueSync2, strNameValue) {
   syncDomElem.addEventListener('change', function () {
     var selectedVal = arrValueSync.indexOf(syncDomElem.value);
     syncDomElem2[strNameValue] = arrValueSync2[selectedVal];
@@ -10,4 +10,4 @@ window.synchronizeFields = function (syncDomElem, syncDomElem2, arrValueSync, ar
     var selectedVal = arrValueSync2.indexOf(syncDomElem2.value);
     syncDomElem[strNameValue] = arrValueSync[selectedVal];
   });
-};
+})();
