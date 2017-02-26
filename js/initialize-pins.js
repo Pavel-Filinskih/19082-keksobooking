@@ -1,6 +1,6 @@
 'use strict';
 
-window.initializePins = function () {
+window.initializePins = (function () {
   var pinMap = document.querySelector('.tokyo__pin-map');
   var dialog = document.querySelector('.dialog');
   var close = document.querySelector('.dialog__close');
@@ -53,4 +53,5 @@ window.initializePins = function () {
       deactivatePin();
     }
   });
-};
+  return;
+});
